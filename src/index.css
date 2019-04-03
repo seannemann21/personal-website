@@ -12,3 +12,45 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.full-page {
+	height: 100vh;
+}
+
+.description-page {
+	background-color: light-blue;
+}
+
+.music-page {
+	background-color: green;
+}
+
+.title-page {
+  background-image: url("./self-portrait.jpg");
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.main-title {
+	padding-top: 55vh;
+	color:white;
+	text-align: center;
+}
+
+.main-sub-title-text {
+	font-size: 2em;
+}
+
+.main-title-text {
+	font-family: 'Pacifico', cursive;
+	font-size: 5em;
+}
+
+@media only screen and (max-width: 600px) {
+
+  .main-title-text {
+  	font-size:3em;
+  }
+}

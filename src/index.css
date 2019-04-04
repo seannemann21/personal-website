@@ -14,7 +14,7 @@ code {
 }
 
 .full-page {
-	height: 100vh;
+	min-height: 100vh;
 }
 
 .description-page {
@@ -46,6 +46,27 @@ code {
 .main-title-text {
 	font-family: 'Pacifico', cursive;
 	font-size: 5em;
+}
+
+.demo {
+	max-width: 100%;
+}
+
+.page-title-text {
+	font-size:3em;
+	font-family: 'Pacifico', cursive;
+}
+
+.description-title {
+	font-size:2em;
+}
+
+.video-container {
+	padding: 1em;
+}
+
+.display-linebreak {
+  white-space: pre-line;
 }
 
 @media only screen and (max-width: 600px) {

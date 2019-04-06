@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 import { Player } from 'video-react';
-import hearYouThereDemo from './hear-you-there-demo.mp4'
+import hearYouThereDemo from './hear-you-there-demo.mp4';
+import summaryData from './summaryData.json';
 
 
 class Footer extends React.Component {
@@ -34,12 +35,28 @@ class Music extends React.Component {
 }
 
 class Project extends React.Component {
-
 	// thanks to speckledcarp
 	// window resizing code taken from https://stackoverflow.com/questions/36862334/get-viewport-window-height-in-reactjs
 	constructor(props) {
 	  super(props);
-	  this.state = { width: 0, height: 0 };
+
+
+	  let primaryColor = '#FFFFFF';
+	  let secondaryColor = '#5AC1D0';
+	  let videoLeft = true;
+	  if(this.props.projectNum % 2 === 1) {
+	  	  let tempColor = primaryColor;
+		  primaryColor = secondaryColor;
+		  secondaryColor = tempColor;
+		  videoLeft = !videoLeft;
+	  }
+
+	  this.state = { width: 0,
+	  				 height: 0 ,
+	  				 primaryColor: primaryColor,
+	  				 secondaryColor: secondaryColor,
+	  				 videoLeft: videoLeft
+	  				};
 	  this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
 	}
 
@@ -60,22 +77,30 @@ class Project extends React.Component {
 		return this.state.width > this.state.height;
 	}
 
+	renderVideo() {
+		return (
+				<div className={"col-12 " + (this.isLandscape() ? 'col-lg-6' : '')}>
+					<span style={{backgroundColor: this.state.secondaryColor}}>
+						<div className="video-container demo shadow-sm" style={{backgroundColor: this.state.secondaryColor}}>
+							<Player className="shadow-sm" playsInline src={this.props.demoSource}/>
+						</div>
+					</span>
+				</div>
+		);
+	}
+
 	render() {
 		return (
-			<div className="container-fluid full-page project-page" style={{backgroundColor: this.props.primaryColor}}>
+			<div className="container-fluid full-page project-page" style={{backgroundColor: this.state.primaryColor, color: this.state.secondaryColor}}>
 				<div className="row">
 					<div className="col page-title-text">
 						{this.props.title}
 					</div>
 				</div>
 				<div className="row">
-					<div className={"col-12 " + (this.isLandscape() ? 'col-lg-6' : '')}>
-						<span style={{'backgroundColor': '#FFFFFF'}}>
-							<div className="video-container demo shadow-sm" style={{backgroundColor: this.props.secondaryColor}}>
-								<Player className="shadow-sm" playsInline src={this.props.demoSource}/>
-							</div>
-						</span>
-					</div>
+					{
+						this.state.videoLeft ? this.renderVideo() : ''
+					}
 					<div className={"col-12 project-description " + (this.isLandscape() ? 'col-lg-6' : '')}>
 						<div className="description-title">
 							~ The Details ~
@@ -86,6 +111,9 @@ class Project extends React.Component {
 							</p>
 						</div>
 					</div>
+					{
+						!this.state.videoLeft ? this.renderVideo() : ''
+					}
 				</div>
 			</div>
 		);
@@ -93,12 +121,41 @@ class Project extends React.Component {
 
 }
 
+class Skill extends React.Component {
+
+	generateStars() {
+		const stars = [];
+		for(let i = 0; i < this.props.maxSkillValue; i++) {
+			if(i < this.props.skillValue) {
+				stars.push(<span className="fa fa-star checked"/>);		
+			} else {
+				stars.push(<span className="fa fa-star"/>);
+			}
+		}
+
+		return stars;
+	}
+
+	render() {
+		return (
+			<div className="skill-outer">
+				<div className="skill-inner">
+					{this.props.skill} <span>{this.generateStars()}</span>
+				</div>
+			</div>
+		);
+	}
+}
+
 class Summary extends React.Component {
 
 	constructor(props) {
 		super(props);
-
-		this.state={
+		const skills = summaryData.skillsData;
+		this.state={	
+						skillsColOne: skills.skillsColOne,
+						skillsColTwo: skills.skillsColTwo,
+						skillsColThree: skills.skillsColThree,
 						bodyText: "Morbi euismod erat in sapien venenatis, sit amet sollicitudin dolor fringilla. Donec rutrum euismod mi, sed maximus nibh suscipit ut. Nam aliquet vel nisi non hendrerit. Suspendisse at tempor dolor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aliquam sit amet nisi vel risus sollicitudin porta a sed erat. Curabitur sem lorem, vehicula vel semper ut, maximus id nibh.\n\nMorbi euismod erat in sapien venenatis, sit amet sollicitudin dolor fringilla. Donec rutrum euismod mi, sed maximus nibh suscipit ut. Nam aliquet vel nisi non hendrerit. Suspendisse at tempor dolor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aliquam sit amet nisi vel risus sollicitudin porta a sed erat. Curabitur sem lorem, vehicula vel semper ut, maximus id nibh."
 				   };
 	}
@@ -119,56 +176,21 @@ class Summary extends React.Component {
 					</div>
 				</div>
 				<div className="row">
-					<div className="col-xs-8 offset-xs-2 col-lg-4 skills-col">
-						<div>
-							Java 5/5
-						</div>
-						<div>
-							C# 5/5
-						</div>
-						<div>
-							JavaScript 5/5
-						</div>
-						<div>
-							Mockito 5/5
-						</div>
-						<div>
-							SQL 4/5
-						</div>
-					</div>
-					<div className="col-xs-8 col-lg-4 skills-col">
-						<div>
-							React 4/5
-						</div>
-						<div>
-							Android 4/5
-						</div>
-						<div>
-							Bootstrap 4/5
-						</div>
-						<div>
-							JQuery 4/5
-						</div>
-						<div>
-							.NET Core 4/5
-						</div>
-					</div>
-					<div className="col-xs-8 col-lg-4 skills-col">
-						<div>
-							Spring Integration 3/5
-						</div>
-						<div>
-							Node.js 3/5
-						</div>
-						<div>
-							Spring Boot 2/5
-						</div>
-						<div>
-							Rabbit MQ 3/5
-						</div>
-						<div>
-							Ruby/Rails 3/5
-						</div>
+					<div className="col-10 offset-1">
+						{this.state.skillsColOne ?
+							<div className="row">
+								<div className="col-xs-8 col-md-4 skills-col">
+									{this.state.skillsColOne.map(x => <Skill skill={x.skill} skillValue={x.skillValue} maxSkillValue={x.maxSkillValue}/>)}
+								</div>
+								<div className="col-xs-8 col-md-4 skills-col">
+									{this.state.skillsColTwo.map(x => <Skill skill={x.skill} skillValue={x.skillValue} maxSkillValue={x.maxSkillValue}/>)}
+								</div>
+								<div className="col-xs-8 col-md-4 skills-col">
+									{this.state.skillsColThree.map(x => <Skill skill={x.skill} skillValue={x.skillValue} maxSkillValue={x.maxSkillValue}/>)}
+								</div>
+							</div>
+						: ""
+						}
 					</div>
 				</div>
 			</div>
@@ -225,6 +247,20 @@ class TitlePage extends React.Component {
 	}
 }
 
+class ProjectsTitlePage extends React.Component {
+	render() {
+		return (
+			<div className="container-fluid full-page projects-title-page">
+				<div className="row">
+					<div className="col projects-text">
+						$: ls Projects_
+					</div>
+				</div>
+			</div>
+		);
+	}
+}
+
 class Main extends React.Component{
 
 	constructor(props){
@@ -234,10 +270,17 @@ class Main extends React.Component{
 									title: 'Hear You There',
 									demoSource: hearYouThereDemo,
 									description: 'Morbi euismod erat in sapien venenatis, sit amet sollicitudin dolor fringilla. Donec rutrum euismod mi, sed maximus nibh suscipit ut. Nam aliquet vel nisi non hendrerit. Suspendisse at tempor dolor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aliquam sit amet nisi vel risus sollicitudin porta a sed erat. Curabitur sem lorem, vehicula vel semper ut, maximus id nibh.\n\nSed vitae pharetra erat. Nullam iaculis quam et interdum hendrerit. Maecenas dictum, augue nec tristique ullamcorper, mi est auctor turpis, eu egestas nisi libero eget nibh. Sed pellentesque auctor libero non maximus. Duis ac erat neque. Integer vulputate in ipsum eget consequat. Curabitur luctus lacinia lectus, et volutpat nibh porta eget.\n\nAenean vel sagittis sem. Suspendisse leo ante, semper a congue non, scelerisque vestibulum orci. Donec vitae tincidunt nisi, a tempus mauris. Nunc eu felis eu orci rutrum vehicula id id felis. Donec porttitor iaculis metus, quis pellentesque risus. Mauris tincidunt ac diam a varius. Proin blandit ligula et nunc volutpat consectetur. Maecenas dictum aliquet facilisis. Curabitur sed facilisis orci, et maximus nulla. Maecenas lectus ex, aliquam eget lacinia in, pharetra sit amet libero. Proin sed porta magna, sed rutrum neque.',
-									primaryColor: '#ffffea',
-									secondaryColor: 'white'
+									projectNum: 0
 								};
+		const weDj = {
+									title: 'We DJ',
+									demoSource: hearYouThereDemo,
+									description: 'Morbi euismod erat in sapien venenatis, sit amet sollicitudin dolor fringilla. Donec rutrum euismod mi, sed maximus nibh suscipit ut. Nam aliquet vel nisi non hendrerit. Suspendisse at tempor dolor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aliquam sit amet nisi vel risus sollicitudin porta a sed erat. Curabitur sem lorem, vehicula vel semper ut, maximus id nibh.\n\nSed vitae pharetra erat. Nullam iaculis quam et interdum hendrerit. Maecenas dictum, augue nec tristique ullamcorper, mi est auctor turpis, eu egestas nisi libero eget nibh. Sed pellentesque auctor libero non maximus. Duis ac erat neque. Integer vulputate in ipsum eget consequat. Curabitur luctus lacinia lectus, et volutpat nibh porta eget.\n\nAenean vel sagittis sem. Suspendisse leo ante, semper a congue non, scelerisque vestibulum orci. Donec vitae tincidunt nisi, a tempus mauris. Nunc eu felis eu orci rutrum vehicula id id felis. Donec porttitor iaculis metus, quis pellentesque risus. Mauris tincidunt ac diam a varius. Proin blandit ligula et nunc volutpat consectetur. Maecenas dictum aliquet facilisis. Curabitur sed facilisis orci, et maximus nulla. Maecenas lectus ex, aliquam eget lacinia in, pharetra sit amet libero. Proin sed porta magna, sed rutrum neque.',
+									projectNum: 1
+								};
+
 		projects.push(hearYouThereProj);
+		projects.push(weDj);
 		this.state = {projects: projects};
 	}
 
@@ -246,8 +289,9 @@ class Main extends React.Component{
 			<>
 			<TitlePage/>
 			<Summary/>
+			<ProjectsTitlePage/>
 				{this.state.projects.map( project => <Project title={project.title} demoSource={project.demoSource} description={project.description} 
-																primaryColor={project.primaryColor} secondaryColor={project.secondaryColor}/>)}
+																projectNum={project.projectNum}/>)}
 			<Music/>
 			<Footer/>
 			</>

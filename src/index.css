@@ -18,7 +18,33 @@ code {
 }
 
 .description-page {
-	background-color: light-blue;
+	background-color: white;
+	color:#5AC1D0;
+}
+
+.checked {
+    color: gold;
+}
+
+.skill-outer {
+	font-size:1.5em;
+	text-align: center;
+}
+
+.skill-inner {
+	text-align: left;
+	display: inline-block;
+}
+
+.projects-title-page {
+	background-color: #5AC1D0;
+	color: white;
+}
+
+.projects-text {
+	font-family: 'Courier New';
+	font-size:10vw;
+	margin-top:30vh;
 }
 
 .music-page {
@@ -34,7 +60,7 @@ code {
 }
 
 .main-title {
-	padding-top: 55vh;
+	margin-top: 55vh;
 	color:white;
 	text-align: center;
 }
@@ -50,6 +76,7 @@ code {
 
 .demo {
 	max-width: 100%;
+	margin-top:3em;
 }
 
 .page-title-text {
@@ -69,10 +96,6 @@ code {
 	text-align: center;
 	font-family: 'Pacifico', cursive;
 	padding-top: 15vh;
-}
-
-.skills-col {
-	text-align: center;
 }
 
 .video-container {

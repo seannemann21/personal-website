@@ -62,7 +62,7 @@ class Project extends React.Component {
 
 	render() {
 		return (
-			<div className="container-fluid full-page project-page" style={{'backgroundColor': '#ffeb3b'}}>
+			<div className="container-fluid full-page project-page" style={{backgroundColor: this.props.primaryColor}}>
 				<div className="row">
 					<div className="col page-title-text">
 						{this.props.title}
@@ -70,17 +70,21 @@ class Project extends React.Component {
 				</div>
 				<div className="row">
 					<div className={"col-12 " + (this.isLandscape() ? 'col-lg-6' : '')}>
-						<div className="video-container demo shadow-lg" style={{'backgroundColor': '#e91e63'}}>
-							<Player playsInline src={this.props.demoSource} className='demo'/>
-						</div>
+						<span style={{'backgroundColor': '#FFFFFF'}}>
+							<div className="video-container demo shadow-sm" style={{backgroundColor: this.props.secondaryColor}}>
+								<Player className="shadow-sm" playsInline src={this.props.demoSource}/>
+							</div>
+						</span>
 					</div>
 					<div className={"col-12 project-description " + (this.isLandscape() ? 'col-lg-6' : '')}>
 						<div className="description-title">
-							Description
+							~ The Details ~
 						</div>
-						<p className="display-linebreak">
-							{this.props.description}
-						</p>
+						<div>
+							<p className="description-body display-linebreak">
+								{this.props.description}
+							</p>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -90,14 +94,82 @@ class Project extends React.Component {
 }
 
 class Summary extends React.Component {
+
+	constructor(props) {
+		super(props);
+
+		this.state={
+						bodyText: "Morbi euismod erat in sapien venenatis, sit amet sollicitudin dolor fringilla. Donec rutrum euismod mi, sed maximus nibh suscipit ut. Nam aliquet vel nisi non hendrerit. Suspendisse at tempor dolor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aliquam sit amet nisi vel risus sollicitudin porta a sed erat. Curabitur sem lorem, vehicula vel semper ut, maximus id nibh.\n\nMorbi euismod erat in sapien venenatis, sit amet sollicitudin dolor fringilla. Donec rutrum euismod mi, sed maximus nibh suscipit ut. Nam aliquet vel nisi non hendrerit. Suspendisse at tempor dolor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aliquam sit amet nisi vel risus sollicitudin porta a sed erat. Curabitur sem lorem, vehicula vel semper ut, maximus id nibh."
+				   };
+	}
 	
 	render() {
 		return (
 			<div className="container-fluid full-page description-page">
 				<div className="row">
-					<h1 className="col page-title-text">
-						Description
-					</h1>
+					<div className="col summary-title">
+						Who Am I?
+					</div>
+				</div>
+				<div className="row">
+					<div className="col-xs-10 offset-xs-1 col-lg-8 offset-lg-2">
+						<p className="display-linebreak description-body">
+							{this.state.bodyText}
+						</p>
+					</div>
+				</div>
+				<div className="row">
+					<div className="col-xs-8 offset-xs-2 col-lg-4 skills-col">
+						<div>
+							Java 5/5
+						</div>
+						<div>
+							C# 5/5
+						</div>
+						<div>
+							JavaScript 5/5
+						</div>
+						<div>
+							Mockito 5/5
+						</div>
+						<div>
+							SQL 4/5
+						</div>
+					</div>
+					<div className="col-xs-8 col-lg-4 skills-col">
+						<div>
+							React 4/5
+						</div>
+						<div>
+							Android 4/5
+						</div>
+						<div>
+							Bootstrap 4/5
+						</div>
+						<div>
+							JQuery 4/5
+						</div>
+						<div>
+							.NET Core 4/5
+						</div>
+					</div>
+					<div className="col-xs-8 col-lg-4 skills-col">
+						<div>
+							Spring Integration 3/5
+						</div>
+						<div>
+							Node.js 3/5
+						</div>
+						<div>
+							Spring Boot 2/5
+						</div>
+						<div>
+							Rabbit MQ 3/5
+						</div>
+						<div>
+							Ruby/Rails 3/5
+						</div>
+					</div>
 				</div>
 			</div>
 		);
@@ -162,8 +234,8 @@ class Main extends React.Component{
 									title: 'Hear You There',
 									demoSource: hearYouThereDemo,
 									description: 'Morbi euismod erat in sapien venenatis, sit amet sollicitudin dolor fringilla. Donec rutrum euismod mi, sed maximus nibh suscipit ut. Nam aliquet vel nisi non hendrerit. Suspendisse at tempor dolor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aliquam sit amet nisi vel risus sollicitudin porta a sed erat. Curabitur sem lorem, vehicula vel semper ut, maximus id nibh.\n\nSed vitae pharetra erat. Nullam iaculis quam et interdum hendrerit. Maecenas dictum, augue nec tristique ullamcorper, mi est auctor turpis, eu egestas nisi libero eget nibh. Sed pellentesque auctor libero non maximus. Duis ac erat neque. Integer vulputate in ipsum eget consequat. Curabitur luctus lacinia lectus, et volutpat nibh porta eget.\n\nAenean vel sagittis sem. Suspendisse leo ante, semper a congue non, scelerisque vestibulum orci. Donec vitae tincidunt nisi, a tempus mauris. Nunc eu felis eu orci rutrum vehicula id id felis. Donec porttitor iaculis metus, quis pellentesque risus. Mauris tincidunt ac diam a varius. Proin blandit ligula et nunc volutpat consectetur. Maecenas dictum aliquet facilisis. Curabitur sed facilisis orci, et maximus nulla. Maecenas lectus ex, aliquam eget lacinia in, pharetra sit amet libero. Proin sed porta magna, sed rutrum neque.',
-									primaryColor: 'yellow',
-									secondaryColor: 'red'
+									primaryColor: '#ffffea',
+									secondaryColor: 'white'
 								};
 		projects.push(hearYouThereProj);
 		this.state = {projects: projects};

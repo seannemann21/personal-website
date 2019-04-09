@@ -4,6 +4,7 @@ import './index.css';
 import * as serviceWorker from './serviceWorker';
 import { Player } from 'video-react';
 import hearYouThereDemo from './hear-you-there-demo.mp4';
+import weDjDemo from './we-dj-demo.mp4';
 import summaryData from './summaryData.json';
 
 
@@ -253,7 +254,7 @@ class ProjectsTitlePage extends React.Component {
 			<div className="container-fluid full-page projects-title-page">
 				<div className="row">
 					<div className="col projects-text">
-						$: ls Projects_
+						C:\> ls Projects_
 					</div>
 				</div>
 			</div>
@@ -274,7 +275,7 @@ class Main extends React.Component{
 								};
 		const weDj = {
 									title: 'We DJ',
-									demoSource: hearYouThereDemo,
+									demoSource: weDjDemo,
 									description: 'Morbi euismod erat in sapien venenatis, sit amet sollicitudin dolor fringilla. Donec rutrum euismod mi, sed maximus nibh suscipit ut. Nam aliquet vel nisi non hendrerit. Suspendisse at tempor dolor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aliquam sit amet nisi vel risus sollicitudin porta a sed erat. Curabitur sem lorem, vehicula vel semper ut, maximus id nibh.\n\nSed vitae pharetra erat. Nullam iaculis quam et interdum hendrerit. Maecenas dictum, augue nec tristique ullamcorper, mi est auctor turpis, eu egestas nisi libero eget nibh. Sed pellentesque auctor libero non maximus. Duis ac erat neque. Integer vulputate in ipsum eget consequat. Curabitur luctus lacinia lectus, et volutpat nibh porta eget.\n\nAenean vel sagittis sem. Suspendisse leo ante, semper a congue non, scelerisque vestibulum orci. Donec vitae tincidunt nisi, a tempus mauris. Nunc eu felis eu orci rutrum vehicula id id felis. Donec porttitor iaculis metus, quis pellentesque risus. Mauris tincidunt ac diam a varius. Proin blandit ligula et nunc volutpat consectetur. Maecenas dictum aliquet facilisis. Curabitur sed facilisis orci, et maximus nulla. Maecenas lectus ex, aliquam eget lacinia in, pharetra sit amet libero. Proin sed porta magna, sed rutrum neque.',
 									projectNum: 1
 								};

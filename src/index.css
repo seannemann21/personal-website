@@ -14,7 +14,11 @@ code {
 }
 
 .full-page {
-	min-height: 100vh;
+	min-height:100vh;
+}
+
+.page {
+	padding:15vh 0vh;
 }
 
 .description-page {
@@ -36,15 +40,17 @@ code {
 	display: inline-block;
 }
 
-.projects-title-page {
-	background-color: #5AC1D0;
-	color: white;
+.skill-name {
+	margin-right: 0.5em;
+}
+
+.skill-stars {
 }
 
 .projects-text {
 	font-family: 'Courier New';
 	font-size:8vw;
-	margin-top:30vh;
+	margin-top:35vh;
 }
 
 .music-page {
@@ -95,7 +101,6 @@ code {
 	font-weight:700;
 	text-align: center;
 	font-family: 'Pacifico', cursive;
-	padding-top: 15vh;
 }
 
 .video-container {
@@ -108,8 +113,25 @@ code {
 
 .description-body {
 	padding: 1em;
+	font-size: 1.2em;
 	border-left: solid;
 	border-right: solid;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #495057;
+  color: white;
+  text-align: center;
+  height: 3em;
+  padding-top: 0.5em;
+}
+
+.footer-link{
+  color: white;
 }
 
 @media only screen and (max-width: 600px) {

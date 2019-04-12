@@ -1,86 +1,81 @@
 {
-	"skillsData": {
-		"skillsColOne" : [
-			{
-				"skill": "Java",
-	    		"skillValue": 5,
-	    		"maxSkillValue": 5
-	    	},
-	    	{
-	    		"skill": "C#",
-	    		"skillValue": 5,
-	    		"maxSkillValue": 5
-	    	},
-	    	{
-	    		"skill": "JavaScript",
-	    		"skillValue": 5,
-	    		"maxSkillValue": 5
-	    	},
-	    	{
-	    		"skill": "Mockito",
-	    		"skillValue": 5,
-	    		"maxSkillValue": 5
-	    	},
-	    	{
-	    		"skill": "SQL",
-	    		"skillValue": 4,
-	    		"maxSkillValue": 5
-	    	}
-		],
-		"skillsColTwo" : [
-			{
-				"skill": "React",
-	    		"skillValue": 4,
-	    		"maxSkillValue": 5
-	    	},
-	    	{
-	    		"skill": "Android",
-	    		"skillValue": 4,
-	    		"maxSkillValue": 5
-	    	},
-	    	{
-	    		"skill": "Bootstrap",
-	    		"skillValue": 4,
-	    		"maxSkillValue": 5
-	    	},
-	    	{
-	    		"skill": "JQuery",
-	    		"skillValue": 4,
-	    		"maxSkillValue": 5
-	    	},
-	    	{
-	    		"skill": ".NET Core",
-	    		"skillValue": 4,
-	    		"maxSkillValue": 5
-	    	}
-		],
-		"skillsColThree" : [
-			{
-				"skill": "Spring I/O",
-	    		"skillValue": 3,
-	    		"maxSkillValue": 5
-	    	},
-	    	{
-	    		"skill": "Node.js",
-	    		"skillValue": 3,
-	    		"maxSkillValue": 5
-	    	},
-	    	{
-	    		"skill": "Ruby/Rails",
-	    		"skillValue": 3,
-	    		"maxSkillValue": 5
-	    	},
-	    	{
-	    		"skill": "Spring Boot",
-	    		"skillValue": 2,
-	    		"maxSkillValue": 5
-	    	},
-	    	{
-	    		"skill": "Rabbit MQ",
-	    		"skillValue": 2,
-	    		"maxSkillValue": 5
-	    	}
-		]
-	}
+	"summary" : "If you couldn't tell from my terrible 'Hello World' knock off (refresh for another), I'm a software developer. I work in Columbus, OH for J.P Morgan Chase on a full stack development team. I graduated from Ohio State University in May of 2018 with a major in Computer Science & Engineering and a minor in Physics, and I'm just trying to continue learning everyday. My hobbies include being harassed for liking Team Lannister in Game of Thrones and breaking ankles on the basketball court (I wish the latter was true). Below are some of skills as a software. I know stars are arbitrary, but it at least gives you an idea. Oh, yeah, and I'm the one in the middle up above ^^^ (I'm taller in real life).",
+	"skills": [
+		{
+			"skill": "Java",
+    		"skillValue": 5,
+    		"maxSkillValue": 5
+    	},
+    	{
+    		"skill": "C#",
+    		"skillValue": 5,
+    		"maxSkillValue": 5
+    	},
+    	{
+    		"skill": "JavaScript",
+    		"skillValue": 5,
+    		"maxSkillValue": 5
+    	},
+    	{
+    		"skill": "Mockito",
+    		"skillValue": 5,
+    		"maxSkillValue": 5
+    	},
+    	{
+    		"skill": "SQL",
+    		"skillValue": 4,
+    		"maxSkillValue": 5
+    	},
+		{
+			"skill": "React",
+    		"skillValue": 4,
+    		"maxSkillValue": 5
+    	},
+    	{
+    		"skill": "Android",
+    		"skillValue": 4,
+    		"maxSkillValue": 5
+    	},
+    	{
+    		"skill": "Bootstrap",
+    		"skillValue": 4,
+    		"maxSkillValue": 5
+    	},
+    	{
+    		"skill": "JQuery",
+    		"skillValue": 4,
+    		"maxSkillValue": 5
+    	},
+    	{
+    		"skill": ".NET Core",
+    		"skillValue": 4,
+    		"maxSkillValue": 5
+    	},
+    	{
+    		"skill": "Node.js",
+    		"skillValue": 3,
+    		"maxSkillValue": 5
+    	},
+    	{
+    		"skill": "Ruby/Rails",
+    		"skillValue": 3,
+    		"maxSkillValue": 5
+    	},
+		{
+			"skill": "JMeter",
+    		"skillValue": 3,
+    		"maxSkillValue": 5
+    	},
+    	{
+    		"skill": "Spring Boot",
+    		"skillValue": 2,
+    		"maxSkillValue": 5
+    	},
+    	{
+    		"skill": "Rabbit MQ",
+    		"skillValue": 2,
+    		"maxSkillValue": 5
+    	}
+	]
 }
 

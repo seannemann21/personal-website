@@ -6,25 +6,13 @@ import { Player } from 'video-react';
 import hearYouThereDemo from './hear-you-there-demo.mp4';
 import weDjDemo from './we-dj-demo.mp4';
 import summaryData from './summaryData.json';
-
-
-class Footer extends React.Component {
-	
-	render() {
-		return (
-			<div>
-				<h6>
-					footer
-				</h6>
-			</div>
-		);
-	}
-}
+import projectDescriptions from './project-descriptions.json';
+import { Footer } from './Footer.js';
 
 class Music extends React.Component {
 	render() {
 		return (
-			<div className="container-fluid full-page music-page">
+			<div className="container-fluid full-page" style={{backgroundColor: this.props.primaryColor, color: this.props.secondaryColor}}>
 				<div className="row">
 					<h1 className="col page-title-text">
 						Description
@@ -41,22 +29,8 @@ class Project extends React.Component {
 	constructor(props) {
 	  super(props);
 
-
-	  let primaryColor = '#FFFFFF';
-	  let secondaryColor = '#5AC1D0';
-	  let videoLeft = true;
-	  if(this.props.projectNum % 2 === 1) {
-	  	  let tempColor = primaryColor;
-		  primaryColor = secondaryColor;
-		  secondaryColor = tempColor;
-		  videoLeft = !videoLeft;
-	  }
-
 	  this.state = { width: 0,
-	  				 height: 0 ,
-	  				 primaryColor: primaryColor,
-	  				 secondaryColor: secondaryColor,
-	  				 videoLeft: videoLeft
+	  				 height: 0
 	  				};
 	  this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
 	}
@@ -81,7 +55,7 @@ class Project extends React.Component {
 	renderVideo() {
 		return (
 				<div className={"col-12 " + (this.isLandscape() ? 'col-lg-6' : '')}>
-					<span style={{backgroundColor: this.state.secondaryColor}}>
+					<span style={{backgroundColor: this.props.secondaryColor}}>
 						<div className="video-container demo shadow-sm" style={{backgroundColor: this.state.secondaryColor}}>
 							<Player className="shadow-sm" playsInline src={this.props.demoSource}/>
 						</div>
@@ -92,7 +66,7 @@ class Project extends React.Component {
 
 	render() {
 		return (
-			<div className="container-fluid full-page project-page" style={{backgroundColor: this.state.primaryColor, color: this.state.secondaryColor}}>
+			<div className="container-fluid full-page project-page" style={{backgroundColor: this.props.primaryColor, color: this.props.secondaryColor}}>
 				<div className="row">
 					<div className="col page-title-text">
 						{this.props.title}
@@ -100,7 +74,7 @@ class Project extends React.Component {
 				</div>
 				<div className="row">
 					{
-						this.state.videoLeft ? this.renderVideo() : ''
+						this.props.contentLeft ? this.renderVideo() : ''
 					}
 					<div className={"col-12 project-description " + (this.isLandscape() ? 'col-lg-6' : '')}>
 						<div className="description-title">
@@ -113,7 +87,7 @@ class Project extends React.Component {
 						</div>
 					</div>
 					{
-						!this.state.videoLeft ? this.renderVideo() : ''
+						!this.props.contentLeft ? this.renderVideo() : ''
 					}
 				</div>
 			</div>
@@ -139,9 +113,9 @@ class Skill extends React.Component {
 
 	render() {
 		return (
-			<div className="skill-outer">
+			<div className="skill-outer co-xs-12 col-md-6 col-lg-4">
 				<div className="skill-inner">
-					{this.props.skill} <span>{this.generateStars()}</span>
+					<span className="display-linebreak skill-name">{this.props.skill}</span><span className="skill-stars text-nowrap">{this.generateStars()}</span>
 				</div>
 			</div>
 		);
@@ -152,18 +126,15 @@ class Summary extends React.Component {
 
 	constructor(props) {
 		super(props);
-		const skills = summaryData.skillsData;
 		this.state={	
-						skillsColOne: skills.skillsColOne,
-						skillsColTwo: skills.skillsColTwo,
-						skillsColThree: skills.skillsColThree,
-						bodyText: "Morbi euismod erat in sapien venenatis, sit amet sollicitudin dolor fringilla. Donec rutrum euismod mi, sed maximus nibh suscipit ut. Nam aliquet vel nisi non hendrerit. Suspendisse at tempor dolor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aliquam sit amet nisi vel risus sollicitudin porta a sed erat. Curabitur sem lorem, vehicula vel semper ut, maximus id nibh.\n\nMorbi euismod erat in sapien venenatis, sit amet sollicitudin dolor fringilla. Donec rutrum euismod mi, sed maximus nibh suscipit ut. Nam aliquet vel nisi non hendrerit. Suspendisse at tempor dolor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aliquam sit amet nisi vel risus sollicitudin porta a sed erat. Curabitur sem lorem, vehicula vel semper ut, maximus id nibh."
-				   };
+						skills: summaryData.skills,
+						bodyText: summaryData.summary
+					};
 	}
 	
 	render() {
 		return (
-			<div className="container-fluid full-page description-page">
+			<div className="container-fluid page" style={{backgroundColor: this.props.primaryColor, color: this.props.secondaryColor}}>
 				<div className="row">
 					<div className="col summary-title">
 						Who Am I?
@@ -178,17 +149,9 @@ class Summary extends React.Component {
 				</div>
 				<div className="row">
 					<div className="col-10 offset-1">
-						{this.state.skillsColOne ?
+						{this.state.skills ?
 							<div className="row">
-								<div className="col-xs-8 col-md-4 skills-col">
-									{this.state.skillsColOne.map(x => <Skill skill={x.skill} skillValue={x.skillValue} maxSkillValue={x.maxSkillValue}/>)}
-								</div>
-								<div className="col-xs-8 col-md-4 skills-col">
-									{this.state.skillsColTwo.map(x => <Skill skill={x.skill} skillValue={x.skillValue} maxSkillValue={x.maxSkillValue}/>)}
-								</div>
-								<div className="col-xs-8 col-md-4 skills-col">
-									{this.state.skillsColThree.map(x => <Skill skill={x.skill} skillValue={x.skillValue} maxSkillValue={x.maxSkillValue}/>)}
-								</div>
+									{this.state.skills.map(x => <Skill skill={x.skill} skillValue={x.skillValue} maxSkillValue={x.maxSkillValue}/>)}
 							</div>
 						: ""
 						}
@@ -251,13 +214,48 @@ class TitlePage extends React.Component {
 class ProjectsTitlePage extends React.Component {
 	render() {
 		return (
-			<div className="container-fluid full-page projects-title-page">
+			<div className="container-fluid full-page" style={{backgroundColor: this.props.primaryColor, color: this.props.secondaryColor}}>
 				<div className="row">
 					<div className="col projects-text">
 						C:\> ls Projects_
 					</div>
 				</div>
 			</div>
+		);
+	}
+}
+
+class BodyPages extends React.Component {
+
+	render() {
+
+		const color1 = '#FFFFFF';
+		const color2 = '#5AC1D0';
+
+		const children = React.Children.map(this.props.children, (child, i) => {
+
+			let primaryColor = color1;
+			let secondaryColor = color2;
+			// content in my case means demo
+			// content only applicable for certain components
+			let contentLeft = true;
+			if(i % 2 === 1) {
+				primaryColor = color2;
+				secondaryColor = color1;
+				contentLeft = false;
+			}
+
+	    	return React.cloneElement(child, {
+	    		primaryColor: primaryColor,
+	    		secondaryColor: secondaryColor,
+	    		contentLeft: contentLeft
+	    	});
+	  	});
+
+		return (
+		    <div>
+		    	{ children }
+		    </div>
 		);
 	}
 }
@@ -270,14 +268,12 @@ class Main extends React.Component{
 		const hearYouThereProj = {
 									title: 'Hear You There',
 									demoSource: hearYouThereDemo,
-									description: 'Morbi euismod erat in sapien venenatis, sit amet sollicitudin dolor fringilla. Donec rutrum euismod mi, sed maximus nibh suscipit ut. Nam aliquet vel nisi non hendrerit. Suspendisse at tempor dolor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aliquam sit amet nisi vel risus sollicitudin porta a sed erat. Curabitur sem lorem, vehicula vel semper ut, maximus id nibh.\n\nSed vitae pharetra erat. Nullam iaculis quam et interdum hendrerit. Maecenas dictum, augue nec tristique ullamcorper, mi est auctor turpis, eu egestas nisi libero eget nibh. Sed pellentesque auctor libero non maximus. Duis ac erat neque. Integer vulputate in ipsum eget consequat. Curabitur luctus lacinia lectus, et volutpat nibh porta eget.\n\nAenean vel sagittis sem. Suspendisse leo ante, semper a congue non, scelerisque vestibulum orci. Donec vitae tincidunt nisi, a tempus mauris. Nunc eu felis eu orci rutrum vehicula id id felis. Donec porttitor iaculis metus, quis pellentesque risus. Mauris tincidunt ac diam a varius. Proin blandit ligula et nunc volutpat consectetur. Maecenas dictum aliquet facilisis. Curabitur sed facilisis orci, et maximus nulla. Maecenas lectus ex, aliquam eget lacinia in, pharetra sit amet libero. Proin sed porta magna, sed rutrum neque.',
-									projectNum: 0
+									description: projectDescriptions.hearYouThereDescription
 								};
 		const weDj = {
 									title: 'We DJ',
 									demoSource: weDjDemo,
-									description: 'Morbi euismod erat in sapien venenatis, sit amet sollicitudin dolor fringilla. Donec rutrum euismod mi, sed maximus nibh suscipit ut. Nam aliquet vel nisi non hendrerit. Suspendisse at tempor dolor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aliquam sit amet nisi vel risus sollicitudin porta a sed erat. Curabitur sem lorem, vehicula vel semper ut, maximus id nibh.\n\nSed vitae pharetra erat. Nullam iaculis quam et interdum hendrerit. Maecenas dictum, augue nec tristique ullamcorper, mi est auctor turpis, eu egestas nisi libero eget nibh. Sed pellentesque auctor libero non maximus. Duis ac erat neque. Integer vulputate in ipsum eget consequat. Curabitur luctus lacinia lectus, et volutpat nibh porta eget.\n\nAenean vel sagittis sem. Suspendisse leo ante, semper a congue non, scelerisque vestibulum orci. Donec vitae tincidunt nisi, a tempus mauris. Nunc eu felis eu orci rutrum vehicula id id felis. Donec porttitor iaculis metus, quis pellentesque risus. Mauris tincidunt ac diam a varius. Proin blandit ligula et nunc volutpat consectetur. Maecenas dictum aliquet facilisis. Curabitur sed facilisis orci, et maximus nulla. Maecenas lectus ex, aliquam eget lacinia in, pharetra sit amet libero. Proin sed porta magna, sed rutrum neque.',
-									projectNum: 1
+									description: projectDescriptions.weDjDescription
 								};
 
 		projects.push(hearYouThereProj);
@@ -289,12 +285,13 @@ class Main extends React.Component{
 		return (
 			<>
 			<TitlePage/>
-			<Summary/>
-			<ProjectsTitlePage/>
-				{this.state.projects.map( project => <Project title={project.title} demoSource={project.demoSource} description={project.description} 
-																projectNum={project.projectNum}/>)}
-			<Music/>
-			<Footer/>
+			<BodyPages>
+				<Summary/>
+				<ProjectsTitlePage/>
+					{this.state.projects.map( project => <Project title={project.title} demoSource={project.demoSource} description={project.description} 
+																	projectNum={project.projectNum}/>)}
+				<Music/>
+			</BodyPages>
 			</>
 		);
 	}

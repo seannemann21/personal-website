@@ -9,7 +9,7 @@ export class TitlePage extends React.Component {
 				<div className="row">
 					<div className="col main-title">
 						<div className="main-title-text">
-							<TypedText finalText="Hello, World!" initialSleep={2000} useOnReveal={true} />
+							<TypedText finalText="Hello, World!" initialSleep={3000} useOnReveal={false} />
 						</div>
 						<div className="main-sub-title-text">
 							An Introduction to Me (Sean Nemann/The One in the Middle)

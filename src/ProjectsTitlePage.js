@@ -7,7 +7,7 @@ export class ProjectsTitlePage extends React.Component {
 			<div className="container-fluid full-page" style={{backgroundColor: this.props.primaryColor, color: this.props.secondaryColor}}>
 				<div className="row">
 					<div className="col projects-text code">
-						C:\> <TypedText finalText="ls Projects\" initialSleep={500} useOnReveal={true}/>
+						C:\> <TypedText finalText="ls Projects\" initialSleep={1200} useOnReveal={true}/>
 					</div>
 				</div>
 			</div>

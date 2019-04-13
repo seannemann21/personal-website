@@ -36,7 +36,7 @@ export class TypedText extends React.Component {
 			<>
 				{this.props.useOnReveal ? <Reveal onReveal={() => this.typeText()} /> : ""}
 				{
-					this.state.text === "" ? <span className="typewriter code">&nbsp;</span> : <span className="typewriter code">{ this.state.text }</span>
+					this.state.text === "" ? <span className="typewriter code"></span> : <span className="typewriter code">{ this.state.text }</span>
 				}
 			</>
 		);

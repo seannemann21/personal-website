@@ -12,6 +12,7 @@ import { Summary } from './Summary.js';
 import { TitlePage } from './TitlePage.js';
 import { ProjectsTitlePage } from './ProjectsTitlePage.js';
 import { BodyPages } from './BodyPages.js';
+import 'video-react/dist/video-react.css';
 
 class Main extends React.Component{
 

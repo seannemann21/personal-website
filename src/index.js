@@ -8,15 +8,33 @@ import weDjDemo from './we-dj-demo.mp4';
 import summaryData from './summaryData.json';
 import projectDescriptions from './project-descriptions.json';
 import { Footer } from './Footer.js';
+import Fade from 'react-reveal/Fade';
+import Reveal from 'react-reveal/Reveal';
 
 class Music extends React.Component {
+
+	constructor(props) {
+		super(props);
+
+		this.state = {musicText: summaryData.musicText};
+	}
+
 	render() {
 		return (
-			<div className="container-fluid full-page" style={{backgroundColor: this.props.primaryColor, color: this.props.secondaryColor}}>
+			<div className="container-fluid summary-page" style={{backgroundColor: this.props.primaryColor, color: this.props.secondaryColor}}>
 				<div className="row">
-					<h1 className="col page-title-text">
-						Description
-					</h1>
+					<Fade>
+						<div className="col summary-title">
+							What I'm Listening To
+						</div>
+					</Fade>
+				</div>
+				<div className="row">
+					<div className="col-xs-10 offset-xs-1 col-lg-8 offset-lg-2">
+						<div className="description-body">
+							<p>{this.state.musicText}</p>
+						</div>
+					</div>
 				</div>
 			</div>
 		);
@@ -56,38 +74,72 @@ class Project extends React.Component {
 		return (
 				<div className={"col-12 " + (this.isLandscape() ? 'col-lg-6' : '')}>
 					<span style={{backgroundColor: this.props.secondaryColor}}>
-						<div className="video-container demo shadow-sm" style={{backgroundColor: this.state.secondaryColor}}>
+						<div className="video-container demo shadow" style={{backgroundColor: this.state.secondaryColor}}>
 							<Player className="shadow-sm" playsInline src={this.props.demoSource}/>
 						</div>
 					</span>
+					<div className="project-link">
+						<a style={{color: this.props.secondaryColor}} href={this.props.appUrl}>{ this.props.appUrl}</a>
+					</div>
+					<div className="project-link">
+						<a style={{color: this.props.secondaryColor}} href={this.props.gitHubUrl}>{ this.props.gitHubUrl}</a>
+					</div>
 				</div>
+		);
+	}
+
+	isVerticalLayout() {
+		return this.state.width < 992 || !this.isLandscape();
+	}
+
+	getDescriptionBorderStyle() {
+		let style = {};
+		if(!this.isVerticalLayout()) {
+			if(this.props.contentLeft) {
+				style={borderLeft: 'solid'};
+			} else {
+				style={borderRight: 'solid'};
+			}
+		}
+
+		return style;
+	}
+
+	renderDescription() {
+		return (
+			<div className={"col-12 project-description " + (this.isLandscape() ? 'col-lg-6' : '')}>
+				<div className="description-title">
+					~ The Details ~
+				</div>
+				<div className="project-description" style={this.getDescriptionBorderStyle()}>
+					{ this.props.descParagraphs.map(paragraph => <Fade><p>{ paragraph }<br/><br/></p></Fade>) }
+				</div>
+			</div>
 		);
 	}
 
 	render() {
 		return (
-			<div className="container-fluid full-page project-page" style={{backgroundColor: this.props.primaryColor, color: this.props.secondaryColor}}>
+			<div className="container-fluid min-padding-page project-page" style={{backgroundColor: this.props.primaryColor, color: this.props.secondaryColor}}>
 				<div className="row">
 					<div className="col page-title-text">
-						{this.props.title}
+						<Fade top>
+							{this.props.title}
+						</Fade>
 					</div>
 				</div>
 				<div className="row">
 					{
-						this.props.contentLeft ? this.renderVideo() : ''
-					}
-					<div className={"col-12 project-description " + (this.isLandscape() ? 'col-lg-6' : '')}>
-						<div className="description-title">
-							~ The Details ~
-						</div>
-						<div>
-							<p className="description-body display-linebreak">
-								{this.props.description}
-							</p>
-						</div>
-					</div>
-					{
-						!this.props.contentLeft ? this.renderVideo() : ''
+						this.props.contentLeft && !this.isVerticalLayout()? 
+						<>
+							<Fade left> {this.renderVideo()} </Fade>
+							<Fade right> {this.renderDescription()} </Fade>
+						</>
+							:
+						<>
+							<Fade left> {this.renderDescription()} </Fade>
+							<Fade right> {this.renderVideo()} </Fade>
+						</>
 					}
 				</div>
 			</div>
@@ -115,7 +167,9 @@ class Skill extends React.Component {
 		return (
 			<div className="skill-outer co-xs-12 col-md-6 col-lg-4">
 				<div className="skill-inner">
-					<span className="display-linebreak skill-name">{this.props.skill}</span><span className="skill-stars text-nowrap">{this.generateStars()}</span>
+					<Fade>
+						<span className="display-linebreak skill-name">{this.props.skill}</span><span className="skill-stars text-nowrap">{this.generateStars()}</span>
+					</Fade>
 				</div>
 			</div>
 		);
@@ -134,11 +188,13 @@ class Summary extends React.Component {
 	
 	render() {
 		return (
-			<div className="container-fluid page" style={{backgroundColor: this.props.primaryColor, color: this.props.secondaryColor}}>
+			<div className="container-fluid summary-page" style={{backgroundColor: this.props.primaryColor, color: this.props.secondaryColor}}>
 				<div className="row">
-					<div className="col summary-title">
-						Who Am I?
-					</div>
+					<Fade>
+						<div className="col summary-title">
+							Who Am I?
+						</div>
+					</Fade>
 				</div>
 				<div className="row">
 					<div className="col-xs-10 offset-xs-1 col-lg-8 offset-lg-2">
@@ -162,26 +218,45 @@ class Summary extends React.Component {
 	}
 }
 
-class Greeter {
-	constructor() {
-		this.hellos = [
-			"Hello",
-			"Howdy",
-			"Hi",
-			"Hey"
-		]
+class TypedText extends React.Component {
 
-		this.worlds = [
-			"World",
-			"Planet",
-			"Earth",
-			"Universe"
-		]
+	constructor(props) {
+		super(props);
+
+		this.state = {text: ""};
+		
+		if(!this.props.useOnReveal) {
+			this.typeText();
+		}
 	}
-	
 
-	getGreeting() {
-		return this.hellos[Math.floor(Math.random() * this.hellos.length)] + ', ' + this.worlds[Math.floor(Math.random() * this.worlds.length)];
+	async typeText() {
+		await this.sleep(this.props.initialSleep);
+		if(this.state.text !== this.props.finalText) {
+			for(let i = 0; i < this.props.finalText.length; i++) {
+				let text = this.state.text;
+				text += this.props.finalText.charAt(i);
+				this.setState({text: text});
+				await this.sleep(200);
+			}
+		}
+	}
+
+	sleep(ms){
+	    return new Promise(resolve=>{
+	        setTimeout(resolve, ms)
+	    })
+	}
+
+	render() {
+		return(
+			<>
+				{this.props.useOnReveal ? <Reveal onReveal={() => this.typeText()} /> : ""}
+				{
+					this.state.text === "" ? <span>&nbsp;</span> : <span className="typewriter code">{ this.state.text }</span>
+				}
+			</>
+		);
 	}
 }
 
@@ -189,8 +264,7 @@ class TitlePage extends React.Component {
 
 	constructor(props) {
 		super(props);
-		const greeter = new Greeter();
-		this.state = {title: greeter.getGreeting()}
+		
 	}
 
 	render() {
@@ -199,7 +273,7 @@ class TitlePage extends React.Component {
 				<div className="row">
 					<div className="col main-title">
 						<div className="main-title-text">
-							{this.state.title}
+							<TypedText finalText="Hello, World!" initialSleep={2000} useOnReveal={false} />
 						</div>
 						<div className="main-sub-title-text">
 							An Introduction to Me (Sean Nemann)
@@ -216,8 +290,8 @@ class ProjectsTitlePage extends React.Component {
 		return (
 			<div className="container-fluid full-page" style={{backgroundColor: this.props.primaryColor, color: this.props.secondaryColor}}>
 				<div className="row">
-					<div className="col projects-text">
-						C:\> ls Projects_
+					<div className="col projects-text code">
+						C:\> <TypedText finalText="ls Projects" initialSleep={500} useOnReveal={true}/>
 					</div>
 				</div>
 			</div>
@@ -254,7 +328,7 @@ class BodyPages extends React.Component {
 
 		return (
 		    <div>
-		    	{ children }
+		    		{ children }
 		    </div>
 		);
 	}
@@ -268,12 +342,16 @@ class Main extends React.Component{
 		const hearYouThereProj = {
 									title: 'Hear You There',
 									demoSource: hearYouThereDemo,
-									description: projectDescriptions.hearYouThereDescription
+									descParagraphs: projectDescriptions.hearYouThereParagraphs,
+									appUrl: 'https://hear-you-there.herokuapp.com',
+									gitHubUrl: 'https://github.com/seannemann21/HearYouThere'
 								};
 		const weDj = {
 									title: 'We DJ',
 									demoSource: weDjDemo,
-									description: projectDescriptions.weDjDescription
+									descParagraphs: projectDescriptions.weDjParagraphs,
+									appUrl: 'https://we-dj.herokuapp.com',
+									gitHubUrl: 'https://github.com/seannemann21/we-dj'
 								};
 
 		projects.push(hearYouThereProj);
@@ -288,10 +366,11 @@ class Main extends React.Component{
 			<BodyPages>
 				<Summary/>
 				<ProjectsTitlePage/>
-					{this.state.projects.map( project => <Project title={project.title} demoSource={project.demoSource} description={project.description} 
-																	projectNum={project.projectNum}/>)}
+					{this.state.projects.map( project => <Project title={project.title} demoSource={project.demoSource} descParagraphs={project.descParagraphs} 
+																	projectNum={project.projectNum} appUrl={project.appUrl} gitHubUrl={project.gitHubUrl}/>)}
 				<Music/>
 			</BodyPages>
+			<Footer/>>
 			</>
 		);
 	}

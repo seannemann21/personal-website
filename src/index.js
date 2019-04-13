@@ -31,9 +31,20 @@ class Music extends React.Component {
 				</div>
 				<div className="row">
 					<div className="col-xs-10 offset-xs-1 col-lg-8 offset-lg-2">
-						<div className="description-body">
-							<p>{this.state.musicText}</p>
-						</div>
+							<div className="description-body">
+								<Fade>
+									<p>{this.state.musicText}</p>
+								</Fade>
+							</div>
+					</div>
+				</div>
+				<div className="row">
+					<div className="col-xs-12 col-lg-8 offset-lg-2 music-col">
+						<Fade>
+							<div className="music">
+								<iframe title="spotify-widget" className="spotify-widget shadow" style={{backgroundColor: this.props.secondaryColor}} src="https://open.spotify.com/embed/user/seannemann/playlist/5TWNX1sTTTBhz5u4TCRf6O" width="300" height="380" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+							</div>
+						</Fade>
 					</div>
 				</div>
 			</div>
@@ -112,7 +123,7 @@ class Project extends React.Component {
 					~ The Details ~
 				</div>
 				<div className="project-description" style={this.getDescriptionBorderStyle()}>
-					{ this.props.descParagraphs.map(paragraph => <Fade><p>{ paragraph }<br/><br/></p></Fade>) }
+					{ this.props.descParagraphs.map((paragraph, i) => <Fade key={this.props.title + '-' + i}><p>{ paragraph }<br/><br/></p></Fade>) }
 				</div>
 			</div>
 		);
@@ -154,9 +165,9 @@ class Skill extends React.Component {
 		const stars = [];
 		for(let i = 0; i < this.props.maxSkillValue; i++) {
 			if(i < this.props.skillValue) {
-				stars.push(<span className="fa fa-star checked"/>);		
+				stars.push(<span key={this.props.skill + '-' + i} className="fa fa-star checked"/>);		
 			} else {
-				stars.push(<span className="fa fa-star"/>);
+				stars.push(<span key={this.props.skill + '-' + i} className="fa fa-star"/>);
 			}
 		}
 
@@ -207,7 +218,7 @@ class Summary extends React.Component {
 					<div className="col-10 offset-1">
 						{this.state.skills ?
 							<div className="row">
-									{this.state.skills.map(x => <Skill skill={x.skill} skillValue={x.skillValue} maxSkillValue={x.maxSkillValue}/>)}
+									{this.state.skills.map((x, i) => <Skill key={"skill-" + i}  skill={x.skill} skillValue={x.skillValue} maxSkillValue={x.maxSkillValue}/>)}
 							</div>
 						: ""
 						}
@@ -262,11 +273,6 @@ class TypedText extends React.Component {
 
 class TitlePage extends React.Component {
 
-	constructor(props) {
-		super(props);
-		
-	}
-
 	render() {
 		return (
 			<div className="container-fluid full-page title-page">
@@ -291,7 +297,7 @@ class ProjectsTitlePage extends React.Component {
 			<div className="container-fluid full-page" style={{backgroundColor: this.props.primaryColor, color: this.props.secondaryColor}}>
 				<div className="row">
 					<div className="col projects-text code">
-						C:\> <TypedText finalText="ls Projects" initialSleep={500} useOnReveal={true}/>
+						C:\> <TypedText finalText="ls Projects\" initialSleep={500} useOnReveal={true}/>
 					</div>
 				</div>
 			</div>
@@ -366,7 +372,7 @@ class Main extends React.Component{
 			<BodyPages>
 				<Summary/>
 				<ProjectsTitlePage/>
-					{this.state.projects.map( project => <Project title={project.title} demoSource={project.demoSource} descParagraphs={project.descParagraphs} 
+					{this.state.projects.map( project => <Project key={project.title} title={project.title} demoSource={project.demoSource} descParagraphs={project.descParagraphs} 
 																	projectNum={project.projectNum} appUrl={project.appUrl} gitHubUrl={project.gitHubUrl}/>)}
 				<Music/>
 			</BodyPages>

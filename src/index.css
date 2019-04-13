@@ -50,7 +50,7 @@ body {
 }
 
 .skill-inner {
-	text-align: left;
+	text-align: center;
 	display: inline-block;
 }
 
@@ -135,6 +135,8 @@ body {
 	font-size: 1.05em;
 	max-width: 100%;
 	text-align: center;
+	overflow-x: hidden;
+	text-overflow: ellipsis;
 }
 
 .description-body {
@@ -147,6 +149,19 @@ body {
 .project-description {
 	padding: 1em;
 	font-size: 1.05em;
+}
+
+.music-col {
+	text-align: center;
+}
+
+.music {
+	text-align: center;
+}
+
+.spotify-widget {
+	padding:1em;
+	margin-top:2em;
 }
 
 .footer {
@@ -197,14 +212,8 @@ Thank you Geoff Graham*/
 
 @media only screen and (max-width: 600px) {
     .footer {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  color: white;
-  text-align: center;
-  height:4rem !important;
-  padding-top: 0.5rem;
+  	height:4rem !important;
+  	padding-top: 0.5rem;
   }
 
   body {

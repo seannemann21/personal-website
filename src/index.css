@@ -76,7 +76,7 @@ body {
 }
 
 .title-page {
-  background-image: url("./self-portrait.jpg");
+  background-image: url("./self-portrait_opt.jpg");
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
@@ -90,7 +90,7 @@ body {
 }
 
 .main-sub-title-text {
-	font-size: 2em;
+	font-size: 1.7em;
 	margin-top: 0.1em;
 }
 

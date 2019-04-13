@@ -12,7 +12,7 @@ export class TitlePage extends React.Component {
 							<TypedText finalText="Hello, World!" initialSleep={2000} useOnReveal={false} />
 						</div>
 						<div className="main-sub-title-text">
-							An Introduction to Me (Sean Nemann)
+							An Introduction to Me (Sean Nemann/The One in the Middle)
 						</div>
 					</div>
 				</div>

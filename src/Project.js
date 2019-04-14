@@ -73,7 +73,7 @@ export class Project extends React.Component {
 					~ The Details ~
 				</div>
 				<div className="project-description" style={this.getDescriptionBorderStyle()}>
-					{ this.props.descParagraphs.map((paragraph, i) => <Fade key={this.props.title + '-' + i}><p>{ paragraph }<br/><br/></p></Fade>) }
+					{ this.props.descParagraphs.map((paragraph, i) => <p key={this.props.title + '-' + i}>{ paragraph }<br/><br/></p>) }
 				</div>
 			</div>
 		);
